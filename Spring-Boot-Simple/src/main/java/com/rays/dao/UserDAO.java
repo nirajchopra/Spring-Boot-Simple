@@ -26,9 +26,17 @@ public class UserDAO {
 	@Autowired
 	public RoleDAO roleDao;
 
+	@Autowired
+	public AttachmentDAO attachmentDao;
+
 	public void populate(UserDTO dto) {
 		RoleDTO roleDto = roleDao.findByPk(dto.getRoleId());
 		dto.setRoleName(roleDto.getName());
+
+		if (dto.getId() != null && dto.getId() > 0) {
+			UserDTO userData = findByPk(dto.getId());
+			dto.setImageId(userData.getImageId());
+		}
 	}
 
 	public long add(UserDTO dto) {
@@ -43,6 +51,9 @@ public class UserDAO {
 	}
 
 	public void delete(UserDTO dto) {
+		if (dto.getImageId() != null && dto.getImageId() > 0) {
+			attachmentDao.delete(attachmentDao.findByPk(dto.getImageId()));
+		}
 		entityManager.remove(dto);
 	}
 
@@ -74,6 +85,7 @@ public class UserDAO {
 			dto = list.get(0);
 
 		}
+
 		return dto;
 	}
 
@@ -91,6 +103,10 @@ public class UserDAO {
 
 			if (dto.getFirstName() != null && dto.getFirstName().length() > 0) {
 				predicateList.add(builder.like(qRoot.get("firstName"), dto.getFirstName() + "%"));
+			}
+
+			if (dto.getRoleId() != null && dto.getRoleId() > 0) {
+				predicateList.add(builder.equal(qRoot.get("roleId"), dto.getRoleId()));
 			}
 
 			if (dto.getDob() != null && dto.getDob().getTime() > 0) {
@@ -111,4 +127,5 @@ public class UserDAO {
 
 		return list;
 	}
+
 }

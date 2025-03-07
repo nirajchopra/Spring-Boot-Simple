@@ -27,4 +27,5 @@ public class RoleForm extends BaseForm {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+
 }

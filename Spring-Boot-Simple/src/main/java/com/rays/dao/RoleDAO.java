@@ -70,4 +70,5 @@ public class RoleDAO {
 
 		return list;
 	}
+
 }
