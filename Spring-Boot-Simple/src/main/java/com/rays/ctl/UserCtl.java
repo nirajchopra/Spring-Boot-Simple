@@ -30,7 +30,7 @@ import com.rays.service.RoleService;
 import com.rays.service.UserService;
 
 @RestController
-@RequestMapping(value = "User")
+@RequestMapping(value = "/ctl/User")
 public class UserCtl extends BaseCtl {
 
 	@Autowired
