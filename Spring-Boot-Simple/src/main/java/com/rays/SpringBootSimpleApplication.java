@@ -12,6 +12,7 @@ public class SpringBootSimpleApplication {
 	public static void main(String[] args) {
 
 		SpringApplication.run(SpringBootSimpleApplication.class, args);
+		System.out.println("Hello Spring");
 
 	}
 
