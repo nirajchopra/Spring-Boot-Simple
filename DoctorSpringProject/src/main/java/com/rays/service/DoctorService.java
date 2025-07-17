@@ -13,36 +13,42 @@ import com.rays.dto.DoctorDTO;
 @Transactional
 public class DoctorService {
 
-    @Autowired
-    private DoctorDAO dao;
+	@Autowired
+	private DoctorDAO dao;
 
-    public long add(DoctorDTO dto) {
-        return dao.add(dto);
-    }
+	
 
-    public void update(DoctorDTO dto) {
-        dao.update(dto);
-    }
+	public List<DoctorDTO> getAllDoctors() {
+		return dao.getAllDoctors();
+	}
 
-    public void delete(long id) {
-        DoctorDTO dto = findById(id);
-        dao.delete(dto);
-    }
+	public long add(DoctorDTO dto) {
+		return dao.add(dto);
+	}
 
-    public DoctorDTO findById(long id) {
-        return dao.findByPk(id);
-    }
+	public void update(DoctorDTO dto) {
+		dao.update(dto);
+	}
 
-    public long save(DoctorDTO dto) {
-        if (dto.getId() != null && dto.getId() > 0) {
-            update(dto);
-            return dto.getId();
-        } else {
-            return add(dto);
-        }
-    }
+	public void delete(long id) {
+		DoctorDTO dto = findById(id);
+		dao.delete(dto);
+	}
 
-    public List<DoctorDTO> search(DoctorDTO dto, int pageNo, int pageSize) {
-        return dao.search(dto, pageNo, pageSize);
-    }
+	public DoctorDTO findById(long id) {
+		return dao.findByPk(id);
+	}
+
+	public long save(DoctorDTO dto) {
+		if (dto.getId() != null && dto.getId() > 0) {
+			update(dto);
+			return dto.getId();
+		} else {
+			return add(dto);
+		}
+	}
+
+	public List<DoctorDTO> search(DoctorDTO dto, int pageNo, int pageSize) {
+		return dao.search(dto, pageNo, pageSize);
+	}
 }
